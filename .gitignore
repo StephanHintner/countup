@@ -1,0 +1,7 @@
+# OS noise
+.DS_Store
+Thumbs.db
+
+# Editor directories
+.vscode/
+.idea/

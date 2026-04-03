@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CountUp</title>
+  <meta name="description" content="Track recurring tasks and see how many days since you last did them." />
+  <meta name="theme-color" content="#6c63ff" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>CountUp</h1>
+    <button id="settings-btn" aria-label="Open settings" title="Settings">⚙️</button>
+  </header>
+
+  <main>
+    <!-- Add task form -->
+    <form id="add-task-form">
+      <input
+        id="task-input"
+        type="text"
+        placeholder="New task name…"
+        autocomplete="off"
+        maxlength="120"
+        required
+      />
+      <button type="submit">Add</button>
+    </form>
+
+    <!-- Sync status bar -->
+    <div id="sync-status" class="sync-status hidden" aria-live="polite"></div>
+
+    <!-- Task list -->
+    <ul id="task-list" aria-label="Task list"></ul>
+
+    <!-- Empty state -->
+    <div id="empty-state" class="empty-state hidden">
+      <p>No tasks yet.<br />Add one above to get started.</p>
+    </div>
+  </main>
+
+  <!-- Settings panel (overlay) -->
+  <div id="settings-overlay" class="overlay hidden" role="dialog" aria-modal="true" aria-labelledby="settings-title">
+    <div class="panel">
+      <h2 id="settings-title">Settings</h2>
+
+      <label for="gh-token">
+        GitHub Personal Access Token
+        <span class="hint">Needs <code>gist</code> scope. <a href="https://github.com/settings/tokens/new?scopes=gist&description=CountUp" target="_blank" rel="noopener">Create one ↗</a></span>
+      </label>
+      <input id="gh-token" type="password" placeholder="ghp_…" autocomplete="off" />
+
+      <label for="gist-id">
+        Gist ID <span class="hint">(leave empty to create a new Gist on first save)</span>
+      </label>
+      <input id="gist-id" type="text" placeholder="auto-created on first save" autocomplete="off" />
+
+      <div class="panel-actions">
+        <button id="settings-save">Save</button>
+        <button id="settings-cancel" class="secondary">Cancel</button>
+      </div>
+
+      <p id="settings-feedback" class="feedback hidden" aria-live="polite"></p>
+    </div>
+  </div>
+
+  <script src="gist.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
