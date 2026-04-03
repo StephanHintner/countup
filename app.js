@@ -6,7 +6,7 @@
  */
 
 (() => {
-  const APP_VERSION = 'v8';
+  const APP_VERSION = 'v9';
 
   // ─── State ───────────────────────────────────────────────────────────────
   let tasks = [];           // [{ id, name, lastDone }]
@@ -105,9 +105,11 @@
 
     if (tasks.length === 0) {
       empty.classList.remove('hidden');
+      empty.style.display = '';
       return;
     }
     empty.classList.add('hidden');
+    empty.style.display = 'none';
 
     // Sort: most days first
     const sorted = [...tasks].sort((a, b) => daysSince(b.lastDone) - daysSince(a.lastDone));
