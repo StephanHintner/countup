@@ -6,7 +6,7 @@
  */
 
 (() => {
-  const APP_VERSION = 'v6';
+  const APP_VERSION = 'v7';
 
   // ─── State ───────────────────────────────────────────────────────────────
   let tasks = [];           // [{ id, name, lastDone }]
@@ -321,10 +321,13 @@
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('./sw.js').catch(() => {});
 
-      // When a new SW takes control, reload once to serve fresh files
+      // Only reload when an *existing* controller is *replaced* (i.e. an update).
+      // Ignore the first-install case (no previous controller → new controller),
+      // which would otherwise cause a reload loop on every first visit.
+      const hadController = !!navigator.serviceWorker.controller;
       let reloading = false;
       navigator.serviceWorker.addEventListener('controllerchange', () => {
-        if (reloading) return;
+        if (!hadController || reloading) return;
         reloading = true;
         window.location.reload();
       });
