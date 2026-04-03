@@ -314,9 +314,17 @@
       if (pendingSync) scheduleSyncToGist();
     });
 
-    // Register service worker
+    // Register service worker and auto-reload when a new version activates
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('./sw.js').catch(() => {});
+
+      // When a new SW takes control, reload once to serve fresh files
+      let reloading = false;
+      navigator.serviceWorker.addEventListener('controllerchange', () => {
+        if (reloading) return;
+        reloading = true;
+        window.location.reload();
+      });
     }
   }
 
