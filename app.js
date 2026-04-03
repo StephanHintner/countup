@@ -6,7 +6,7 @@
  */
 
 (() => {
-  const APP_VERSION = 'v7';
+  const APP_VERSION = 'v8';
 
   // ─── State ───────────────────────────────────────────────────────────────
   let tasks = [];           // [{ id, name, lastDone }]
@@ -218,12 +218,15 @@
     document.getElementById('gist-id').value   = Gist.getGistId();
     document.getElementById('settings-feedback').classList.add('hidden');
     document.getElementById('app-version').textContent = APP_VERSION;
+    overlay.style.display = '';
     overlay.classList.remove('hidden');
     document.getElementById('gh-token').focus();
   }
 
   function closeSettings() {
-    document.getElementById('settings-overlay').classList.add('hidden');
+    const overlay = document.getElementById('settings-overlay');
+    overlay.classList.add('hidden');
+    overlay.style.display = 'none';
   }
 
   async function saveSettings() {
@@ -261,6 +264,9 @@
   // ─── Event wiring ─────────────────────────────────────────────────────────
 
   function init() {
+    // Ensure settings overlay is hidden regardless of CSS load state
+    closeSettings();
+
     // Load local data first (instant)
     tasks = loadLocal();
     render();
