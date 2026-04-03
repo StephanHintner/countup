@@ -47,20 +47,29 @@ Whenever you make changes to the app, follow these steps so all devices receive 
 
 Edit any of the source files (`app.js`, `style.css`, `index.html`, etc.).
 
-### 2. Bump the cache version in `sw.js`
+### 2. Bump the version in `app.js` and cache name in `sw.js`
 
-Open `sw.js` and increment the version number on the first line:
+Open `app.js` and increment `APP_VERSION` on the second line:
+
+```js
+// Before:
+const APP_VERSION = 'v5';
+// After:
+const APP_VERSION = 'v6';
+```
+
+Open `sw.js` and increment `CACHE_NAME` on the first line:
 
 ```js
 // Before:
 const CACHE_NAME = 'countup-v5';
-
 // After:
 const CACHE_NAME = 'countup-v6';
 ```
 
 > **Why?** The service worker only re-fetches files when it detects a change in `sw.js`.
 > Bumping the cache name is the trigger. If you skip this step, users will keep seeing the old version.
+> Keep both version numbers in sync — the version shown in the app (⚙️ Settings) comes from `APP_VERSION`.
 
 ### 3. Commit and push
 

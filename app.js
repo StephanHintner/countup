@@ -6,6 +6,8 @@
  */
 
 (() => {
+  const APP_VERSION = 'v6';
+
   // ─── State ───────────────────────────────────────────────────────────────
   let tasks = [];           // [{ id, name, lastDone }]
   let syncTimer = null;
@@ -215,6 +217,7 @@
     document.getElementById('gh-token').value  = Gist.getToken();
     document.getElementById('gist-id').value   = Gist.getGistId();
     document.getElementById('settings-feedback').classList.add('hidden');
+    document.getElementById('app-version').textContent = APP_VERSION;
     overlay.classList.remove('hidden');
     document.getElementById('gh-token').focus();
   }

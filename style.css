@@ -338,5 +338,9 @@ main {
 .feedback.error { background: rgba(255,107,107,0.15); color: var(--danger); }
 .feedback.ok    { background: rgba(111,239,176,0.15); color: #6fefb0; }
 
-/* ─── Utilities ─────────────────────────────────────────────────────────── */
-.hidden { display: none !important; }
+.version-label {
+  font-size: 0.75rem;
+  color: var(--muted);
+  text-align: center;
+  margin-top: 0.25rem;
+}

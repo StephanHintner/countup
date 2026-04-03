@@ -5,7 +5,7 @@
  * Falls back to network when cache misses, then caches the response.
  */
 
-const CACHE_NAME = 'countup-v5';
+const CACHE_NAME = 'countup-v6';
 const STATIC_ASSETS = [
   './',
   './index.html',
